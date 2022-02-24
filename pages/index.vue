@@ -1,24 +1,24 @@
 <template>
   <div class="bg-gray-100 w-full min-h-screen p-4">
     <div class="flex flex-col space-y-2 container mx-auto ">
-      <div class="bg-white p-2 rounded-md shadow-md flex flex-col md:flex-row md:space-y-0 space-y-2 justify-between items-center">
-        <p class="text-xl text-blue-600 font-semibold">
-          Prospark Product
+      <div class="bg-white p-2 rounded-md flex flex-col md:flex-row md:space-y-0 space-y-2 justify-between items-center">
+        <p class="text-xl font-semibold">
+          Product List
         </p>
       </div>
-      <div v-if="data.length > 0" class="grid grid-cols-2 gap-2 ">
-        <div v-for="(item, key) in data" :key="key" class="bg-white rounded-md shadow-md p-4">
-          <p class="hover:text-blue-600 text-xl text-gray-900">
+      <div v-if="data.length > 0">
+        <div v-for="(item, key) in data" :key="key" class="bg-white p-4">
+          <p class="text-xl">
             {{ item.name }}
           </p>
-          <p class="text-sm text-gray-800">
+          <p class="text-sm">
             {{ item.description }}
           </p>
-          <p class="text-sm text-gray-800">
-            Qty : {{ item.qty }}
+          <p class="text-sm">
+            {{ item.qty }}
           </p>
-          <p class="text-base font-semibold text-blue-600">
-            Rp. {{ item.price }}
+          <p class="text-base font-semibold">
+            {{ item.price }}
           </p>
         </div>
       </div>
@@ -31,7 +31,7 @@
         </div>
       </div>
       <div v-if="metadata.next_page_url != null && isLoading === false" class="flex items-center justify-center py-4">
-        <button class="ml-2 text-white hover:bg-blue-700 bg-blue-600 rounded-md py-2 px-4" @click="getNextUser">
+        <button class="ml-2 text-white hover:bg-blue-700 bg-blue-600 rounded-md py-2 px-4" @click="getNextPage">
           Load More
         </button>
       </div>
@@ -41,7 +41,7 @@
           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
-        </div> Loading...
+        </div> Loading
       </div>
     </div>
   </div>
@@ -49,7 +49,7 @@
 
 <script>
 export default {
-  name: 'IndexPage',
+  name: 'ProductPage',
   data () {
     return {
       data: [],
@@ -66,7 +66,7 @@ export default {
     this.getData()
   },
   mounted () {
-    this.getNextUser()
+    this.getNextPage()
   },
   methods: {
     getData () {
@@ -91,7 +91,7 @@ export default {
         this.isLoading = false
       })
     },
-    getNextUser () {
+    getNextPage () {
       const self = this
       this.isLoading = true
       this.$axios.$get(self.metadata.next_page_url, {

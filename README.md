@@ -1,3 +1,5 @@
+[![ci](https://github.com/Zalfrie/prospark-frontend/actions/workflows/ci.yml/badge.svg)](https://github.com/Zalfrie/prospark-frontend/actions/workflows/ci.yml)
+
 # prospark-frontend
 
 ## Build Setup
